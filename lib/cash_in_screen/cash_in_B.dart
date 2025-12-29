@@ -23,34 +23,44 @@ class CashInSummaryScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 100.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 10),
-
-                _buildLabelValue('Date', date),
-                const SizedBox(height: 25),
-
-                _buildLabelValue('GCash Account Name', accountName),
-                const SizedBox(height: 25),
-
-                _buildLabelValue('GCash Number', gcashNumber),
-                const SizedBox(height: 25),
-
-                _buildLabelValue('Amount', "₱ $amount"),
-                const SizedBox(height: 35),
-
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Confirm'),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: const BorderSide(color: Colors.black12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 20,
+                        horizontal: 16,
+                      ),
+                      child: Column(
+                        children: [
+                          _buildLabelValue('Date', date),
+                          _buildLabelValue('GCash Account Name', accountName),
+                          _buildLabelValue('GCash Number', gcashNumber),
+                          _buildLabelValue('Amount', '₱ $amount'),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 24),
+
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Confirm'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -67,12 +77,19 @@ class CashInSummaryScreen extends StatelessWidget {
           style: const TextStyle(fontSize: 20),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 6),
+        const Divider(),
+
         Text(
           label,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Colors.blue[900],
+          ),
           textAlign: TextAlign.center,
         ),
+
+        const SizedBox(height: 6),
       ],
     );
   }

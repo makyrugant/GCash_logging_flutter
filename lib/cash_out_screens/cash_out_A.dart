@@ -98,9 +98,8 @@ class _CashOutScreenState extends State<CashOutScreen> {
                         GcashRefFormatter(),
                       ],
                       onTap: () {
-                        // Ensure it starts with "09" even before typing
                         if (outnumberController.text.isEmpty) {
-                          outnumberController.text = '09';
+                          outnumberController.text = '';
                           outnumberController.selection =
                               TextSelection.fromPosition(
                                 TextPosition(
@@ -112,8 +111,8 @@ class _CashOutScreenState extends State<CashOutScreen> {
                       validator: (value) {
                         final raw =
                             value?.replaceAll(RegExp(r'[^0-9]'), '') ?? '';
-                        if (raw.length != 11) {
-                          return 'Enter an 11-digit number';
+                        if (raw.length < 13) {
+                          return 'Enter an 13-digit number';
                         }
                         return null;
                       },
