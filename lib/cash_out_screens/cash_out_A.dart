@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gcash_logging_android/summary_screen.dart';
 import 'package:gcash_logging_android/services/amt_formatter.dart';
 import 'package:gcash_logging_android/services/number_formatter.dart';
 import 'package:gcash_logging_android/services/ref_formatter.dart';
@@ -71,6 +72,12 @@ class _CashOutScreenState extends State<CashOutScreen> {
                             ' ',
                           )[0];
                         }
+                      },
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Required';
+                        }
+                        return null;
                       },
                     ),
                     const SizedBox(height: 24),
@@ -157,7 +164,20 @@ class _CashOutScreenState extends State<CashOutScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            // handle submit here
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => SummaryScreen(
+                                    date: outdateController.text,
+                                    name: outreceiverNameController.text,
+                                    number: outnumberController.text,
+                                    amount: outamountController.text,
+                                    type: 'CASH OUT',
+                                  ),
+                                ),
+                              );
+                            }
                           }
                         },
                         child: const Text('Submit'),

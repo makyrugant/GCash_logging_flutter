@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gcash_logging_android/cash_in_screen/cash_in_B.dart';
+import 'package:gcash_logging_android/cash_in_screen/DELcash_in_B.dart';
+import 'package:gcash_logging_android/summary_screen.dart';
 import 'package:gcash_logging_android/services/amt_formatter.dart';
 import 'package:gcash_logging_android/services/number_formatter.dart';
 
@@ -70,6 +71,12 @@ class _CashInScreenState extends State<CashInScreen> {
                             ' ',
                           )[0];
                         }
+                      },
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Required';
+                        }
+                        return null;
                       },
                     ),
                     const SizedBox(height: 24),
@@ -160,11 +167,12 @@ class _CashInScreenState extends State<CashInScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => CashInSummaryScreen(
+                                builder: (_) => SummaryScreen(
                                   date: indateController.text,
-                                  accountName: inaccountNameController.text,
-                                  gcashNumber: innumberController.text,
+                                  name: inaccountNameController.text,
+                                  number: innumberController.text,
                                   amount: inamountController.text,
+                                  type: 'CASH IN',
                                 ),
                               ),
                             );

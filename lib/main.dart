@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gcash_logging_android/main_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+  await Hive.openBox('summaries');
+  await Hive.openBox('sync_meta');
   runApp(const MyApp());
 }
 
