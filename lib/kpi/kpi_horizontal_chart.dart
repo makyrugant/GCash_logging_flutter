@@ -11,6 +11,10 @@ class TopUsersBarChart extends StatelessWidget {
     final entries = data.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
 
+    if (entries.isEmpty) {
+      return const SizedBox(height: 200);
+    }
+
     return Card(
       child: SizedBox(
         height: 260,
@@ -26,10 +30,22 @@ class TopUsersBarChart extends StatelessWidget {
               leftTitles: AxisTitles(
                 sideTitles: SideTitles(
                   showTitles: true,
-                  getTitlesWidget: (v, _) => Text(
-                    entries[v.toInt()].key,
-                    style: const TextStyle(fontSize: 10),
-                  ),
+                  interval: 1,
+                  getTitlesWidget: (value, _) {
+                    final index = value.toInt();
+
+                    if (index < 0 || index >= entries.length) {
+                      return const SizedBox.shrink();
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: Text(
+                        entries[index].key,
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                    );
+                  },
                 ),
               ),
               bottomTitles: AxisTitles(

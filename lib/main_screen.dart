@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gcash_logging_android/cash_in_screen/cash_in_A.dart';
 import 'package:gcash_logging_android/cash_out_screens/cash_out_A.dart';
 import 'package:gcash_logging_android/history/hist_screen.dart';
+import 'package:gcash_logging_android/kpi/kpi_head.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -65,7 +66,9 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const CashOutScreen()),
+                    MaterialPageRoute(
+                      builder: (_) => const SummaryStatsScreen(),
+                    ),
                   );
                 },
                 child: const Padding(

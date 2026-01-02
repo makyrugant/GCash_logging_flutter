@@ -11,15 +11,31 @@ class SummaryStatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final stats = SummaryStats();
 
-    return ListView(
-      padding: const EdgeInsets.all(12),
-      children: [
-        SummaryKpiRow(stats: stats),
-        const SizedBox(height: 12),
-        DailyTotalBarChart(data: stats.totalByDate()),
-        const SizedBox(height: 12),
-        TopUsersBarChart(data: stats.totalByUser()),
-      ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SummaryKpiRow(stats: stats),
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: 260,
+                child: DailyTotalBarChart(data: stats.totalByDate()),
+              ),
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: 280,
+                child: TopUsersBarChart(data: stats.totalByUser()),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
